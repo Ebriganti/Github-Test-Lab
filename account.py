@@ -2,36 +2,36 @@ class Account:
     """
     A class representing details for a bank account
     """
-    def __init__(self, name) -> None:
+    def __init__(self, name: str) -> None:
         """
-        Constructer to create initial account object
+        Constructor to create initial account object
         :param name: Person's first name
         """
-        self.name = name
-        self.balance = 0
+        self.__name = name
+        self.__balance = 0
 
-    def deposit(self, amount) -> True:
+    def deposit(self, amount: float) -> True or False:
         """
         Method to add money to balance
         :param amount: amount of money being added
-        :return: boolean of whether transaction was successful
+        :return: boolean for whether transaction was successful
         """
         if amount > 0:
-            self.balance += amount
+            self.__balance += amount
             return True
         else:
             return False
 
-    def withdraw(self, amount) -> True:
+    def withdraw(self, amount: float) -> True or False:
         """
         Method to remove money from balance
         :param amount: amount of money being removed
-        :return: boolean of whether transaction was successful
+        :return: boolean for whether transaction was successful
         """
-        if amount <= 0 or amount > self.balance:
+        if amount <= 0 or amount > self.__balance:
             return False
         else:
-            self.balance -= amount
+            self.__balance -= amount
             return True
 
     def get_balance(self) -> float:
@@ -39,11 +39,11 @@ class Account:
         Method to access balance
         :return: Account balance
         """
-        return self.balance
+        return self.__balance
 
     def get_name(self) -> str:
         """
         Method to access name
         :return: Account owner name
         """
-        return self.name
+        return self.__name

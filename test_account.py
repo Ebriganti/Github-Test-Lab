@@ -1,7 +1,7 @@
-import pytest
+from pytest import *
 from account import *
 
-class Account:
+class Test:
     def setup_method(self):
         self.a1 = Account("John")
 
@@ -10,21 +10,23 @@ class Account:
 
     def test_init(self):
         assert self.a1.get_name() == "John"
+        assert self.a1.get_balance() == 0
 
     def test_deposit(self):
-        assert self.a1.deposit(30) is True
-        assert self.a1.get_balance == 30
+        assert self.a1.deposit(-3) is False
+        assert self.a1.get_balance() == 0
         assert self.a1.deposit(0) is False
-        assert self.a1.get_balance == 30
-        assert self.a1.deposit(-30) is False
-        assert self.a1.get_balance == 30
+        assert self.a1.get_balance() == 0
+        assert self.a1.deposit(3) is True
+        assert self.a1.get_balance() == 3
 
     def test_withdraw(self):
-        assert self.a1.withdraw(10) is True
-        assert self.a1.get_balance == 20
+        self.a1.deposit(3)
+        assert self.a1.withdraw(-3) is False
+        assert self.a1.get_balance() == 3
         assert self.a1.withdraw(0) is False
-        assert self.a1.get_balance == 20
-        assert self.a1.withdraw(40) is False
-        assert self.a1.get_balance == 20
-        assert self.a1.withdraw(-10) is False
-        assert self.a1.get_balance == 20
+        assert self.a1.get_balance() == 3
+        assert self.a1.withdraw(4) is False
+        assert self.a1.get_balance() == 3
+        assert self.a1.withdraw(3) is True
+        assert self.a1.get_balance() == 0
